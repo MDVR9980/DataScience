@@ -10,10 +10,10 @@ output_file('thor2.html')
 # Load the entire dataset without sampling
 data = pd.read_csv('thor_wwii.csv')
 
-# Print total number of samples and unique countries for verification
-print("Total samples in data:", len(data))
-print("Number of unique countries:", data['COUNTRY_FLYING_MISSION'].nunique())
-print("List of unique countries:", data['COUNTRY_FLYING_MISSION'].unique())
+# # Print total number of samples and unique countries for verification
+# print("Total samples in data:", len(data))
+# print("Number of unique countries:", data['COUNTRY_FLYING_MISSION'].nunique())
+# print("List of unique countries:", data['COUNTRY_FLYING_MISSION'].unique())
 
 # Group data by country and sum relevant columns
 dataGrouped = data.groupby('COUNTRY_FLYING_MISSION')[['TOTAL_TONS', 'TONS_FRAG', 'TONS_IC', 'TONS_HE']].sum().reset_index()
