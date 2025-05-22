@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bokeh Plot</title>
+    <style>
+      html, body {
+        box-sizing: border-box;
+        display: flow-root;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.3.min.js"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
+  </head>
+  <body>
+    <div id="cd21e621-ae5a-4f07-bec3-322c3a9f5acd" data-root-id="p1004" style="display: contents;"></div>
+  
+    <script type="application/json" id="eddd7c31-dd43-4056-b776-ef1f72813a74">
+      {"52a0ea5d-1342-479f-bf2b-fb8dd5e27d6d":{"version":"3.6.3","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1004","attributes":{"width":1000,"x_range":{"type":"object","name":"FactorRange","id":"p1014","attributes":{"factors":["GREAT BRITAIN","USA"]}},"y_range":{"type":"object","name":"DataRange1d","id":"p1006"},"x_scale":{"type":"object","name":"CategoricalScale","id":"p1015"},"y_scale":{"type":"object","name":"LinearScale","id":"p1016"},"title":{"type":"object","name":"Title","id":"p1007","attributes":{"text":"Total Tons by Country"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1052","attributes":{"name":"TONS_FRAG","data_source":{"type":"object","name":"ColumnDataSource","id":"p1001","attributes":{"selected":{"type":"object","name":"Selection","id":"p1002","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1003"},"data":{"type":"map","entries":[["index",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAAEAAAA="},"shape":[2],"dtype":"int32","order":"little"}],["COUNTRY_FLYING_MISSION",{"type":"ndarray","array":["GREAT BRITAIN","USA"],"shape":[2],"dtype":"object","order":"little"}],["TOTAL_TONS",{"type":"ndarray","array":{"type":"bytes","data":"MzMz8xb6MEHhehSuj804QQ=="},"shape":[2],"dtype":"float64","order":"little"}],["TONS_FRAG",{"type":"ndarray","array":{"type":"bytes","data":"AAAAAADgkkDhehSufyr/QA=="},"shape":[2],"dtype":"float64","order":"little"}],["TONS_IC",{"type":"ndarray","array":{"type":"bytes","data":"BoGVQ2GECUGamZmZQQ8JQQ=="},"shape":[2],"dtype":"float64","order":"little"}],["TONS_HE",{"type":"ndarray","array":{"type":"bytes","data":"XI/CdWp/KkFmZmamI84zQQ=="},"shape":[2],"dtype":"float64","order":"little"}],["colors",{"type":"ndarray","array":["#1f77b4","#ff7f0e"],"shape":[2],"dtype":"object","order":"little"}]]}}},"view":{"type":"object","name":"CDSView","id":"p1053","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1054"}}},"glyph":{"type":"object","name":"VBar","id":"p1049","attributes":{"x":{"type":"field","field":"COUNTRY_FLYING_MISSION"},"width":{"type":"value","value":0.4},"bottom":{"type":"expr","expr":{"type":"object","name":"Stack","id":"p1040","attributes":{"fields":[]}}},"top":{"type":"expr","expr":{"type":"object","name":"Stack","id":"p1041","attributes":{"fields":["TONS_FRAG"]}}},"line_color":{"type":"value","value":"#1f77b4"},"fill_color":{"type":"value","value":"#1f77b4"},"hatch_color":{"type":"value","value":"#1f77b4"}}},"nonselection_glyph":{"type":"object","name":"VBar","id":"p1050","attributes":{"x":{"type":"field","field":"COUNTRY_FLYING_MISSION"},"width":{"type":"value","value":0.4},"bottom":{"type":"expr","expr":{"id":"p1040"}},"top":{"type":"expr","expr":{"id":"p1041"}},"line_color":{"type":"value","value":"#1f77b4"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"value","value":"#1f77b4"},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"value","value":"#1f77b4"},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"VBar","id":"p1051","attributes":{"x":{"type":"field","field":"COUNTRY_FLYING_MISSION"},"width":{"type":"value","value":0.4},"bottom":{"type":"expr","expr":{"id":"p1040"}},"top":{"type":"expr","expr":{"id":"p1041"}},"line_color":{"type":"value","value":"#1f77b4"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"value","value":"#1f77b4"},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"value","value":"#1f77b4"},"hatch_alpha":{"type":"value","value":0.2}}}}},{"type":"object","name":"GlyphRenderer","id":"p1063","attributes":{"name":"TONS_IC","data_source":{"id":"p1001"},"view":{"type":"object","name":"CDSView","id":"p1064","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1065"}}},"glyph":{"type":"object","name":"VBar","id":"p1060","attributes":{"x":{"type":"field","field":"COUNTRY_FLYING_MISSION"},"width":{"type":"value","value":0.4},"bottom":{"type":"expr","expr":{"type":"object","name":"Stack","id":"p1042","attributes":{"fields":["TONS_FRAG"]}}},"top":{"type":"expr","expr":{"type":"object","name":"Stack","id":"p1043","attributes":{"fields":["TONS_FRAG","TONS_IC"]}}},"line_color":{"type":"value","value":"#ff7f0e"},"fill_color":{"type":"value","value":"#ff7f0e"},"hatch_color":{"type":"value","value":"#ff7f0e"}}},"nonselection_glyph":{"type":"object","name":"VBar","id":"p1061","attributes":{"x":{"type":"field","field":"COUNTRY_FLYING_MISSION"},"width":{"type":"value","value":0.4},"bottom":{"type":"expr","expr":{"id":"p1042"}},"top":{"type":"expr","expr":{"id":"p1043"}},"line_color":{"type":"value","value":"#ff7f0e"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"value","value":"#ff7f0e"},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"value","value":"#ff7f0e"},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"VBar","id":"p1062","attributes":{"x":{"type":"field","field":"COUNTRY_FLYING_MISSION"},"width":{"type":"value","value":0.4},"bottom":{"type":"expr","expr":{"id":"p1042"}},"top":{"type":"expr","expr":{"id":"p1043"}},"line_color":{"type":"value","value":"#ff7f0e"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"value","value":"#ff7f0e"},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"value","value":"#ff7f0e"},"hatch_alpha":{"type":"value","value":0.2}}}}},{"type":"object","name":"GlyphRenderer","id":"p1073","attributes":{"name":"TONS_HE","data_source":{"id":"p1001"},"view":{"type":"object","name":"CDSView","id":"p1074","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1075"}}},"glyph":{"type":"object","name":"VBar","id":"p1070","attributes":{"x":{"type":"field","field":"COUNTRY_FLYING_MISSION"},"width":{"type":"value","value":0.4},"bottom":{"type":"expr","expr":{"type":"object","name":"Stack","id":"p1044","attributes":{"fields":["TONS_FRAG","TONS_IC"]}}},"top":{"type":"expr","expr":{"type":"object","name":"Stack","id":"p1045","attributes":{"fields":["TONS_FRAG","TONS_IC","TONS_HE"]}}},"line_color":{"type":"value","value":"#2ca02c"},"fill_color":{"type":"value","value":"#2ca02c"},"hatch_color":{"type":"value","value":"#2ca02c"}}},"nonselection_glyph":{"type":"object","name":"VBar","id":"p1071","attributes":{"x":{"type":"field","field":"COUNTRY_FLYING_MISSION"},"width":{"type":"value","value":0.4},"bottom":{"type":"expr","expr":{"id":"p1044"}},"top":{"type":"expr","expr":{"id":"p1045"}},"line_color":{"type":"value","value":"#2ca02c"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"value","value":"#2ca02c"},"fill_alpha":{"type":"value","value":0.1},"hatch_color":{"type":"value","value":"#2ca02c"},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"VBar","id":"p1072","attributes":{"x":{"type":"field","field":"COUNTRY_FLYING_MISSION"},"width":{"type":"value","value":0.4},"bottom":{"type":"expr","expr":{"id":"p1044"}},"top":{"type":"expr","expr":{"id":"p1045"}},"line_color":{"type":"value","value":"#2ca02c"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"value","value":"#2ca02c"},"fill_alpha":{"type":"value","value":0.2},"hatch_color":{"type":"value","value":"#2ca02c"},"hatch_alpha":{"type":"value","value":0.2}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1013","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1027"},{"type":"object","name":"WheelZoomTool","id":"p1028","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1029","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1030","attributes":{"syncable":false,"line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","handles":{"type":"object","name":"BoxInteractionHandles","id":"p1036","attributes":{"all":{"type":"object","name":"AreaVisuals","id":"p1035","attributes":{"fill_color":"white","hover_fill_color":"lightgray"}}}}}}}},{"type":"object","name":"SaveTool","id":"p1037"},{"type":"object","name":"ResetTool","id":"p1038"},{"type":"object","name":"HelpTool","id":"p1039"}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1022","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1023","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1024"},"major_label_policy":{"type":"object","name":"AllLabels","id":"p1025"}}}],"below":[{"type":"object","name":"CategoricalAxis","id":"p1017","attributes":{"ticker":{"type":"object","name":"CategoricalTicker","id":"p1018"},"formatter":{"type":"object","name":"CategoricalTickFormatter","id":"p1019"},"major_label_orientation":1,"major_label_policy":{"type":"object","name":"AllLabels","id":"p1020"}}}],"center":[{"type":"object","name":"Grid","id":"p1021","attributes":{"axis":{"id":"p1017"}}},{"type":"object","name":"Grid","id":"p1026","attributes":{"dimension":1,"axis":{"id":"p1022"}}},{"type":"object","name":"Legend","id":"p1055","attributes":{"items":[{"type":"object","name":"LegendItem","id":"p1056","attributes":{"label":{"type":"value","value":"\u0642\u0637\u0639\u0627\u062a"},"renderers":[{"id":"p1052"}]}},{"type":"object","name":"LegendItem","id":"p1066","attributes":{"label":{"type":"value","value":" \u0627\u0634\u062a\u0639\u0627\u0644 \u0632\u0627"},"renderers":[{"id":"p1063"}]}},{"type":"object","name":"LegendItem","id":"p1076","attributes":{"label":{"type":"value","value":"\u0627\u0646\u0641\u062c\u0627\u0631 \u0642\u0648\u06cc"},"renderers":[{"id":"p1073"}]}}]}}]}}]}}
+    </script>
+    <script type="text/javascript">
+      (function() {
+        const fn = function() {
+          Bokeh.safely(function() {
+            (function(root) {
+              function embed_document(root) {
+              const docs_json = document.getElementById('eddd7c31-dd43-4056-b776-ef1f72813a74').textContent;
+              const render_items = [{"docid":"52a0ea5d-1342-479f-bf2b-fb8dd5e27d6d","roots":{"p1004":"cd21e621-ae5a-4f07-bec3-322c3a9f5acd"},"root_ids":["p1004"]}];
+              root.Bokeh.embed.embed_items(docs_json, render_items);
+              }
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+              } else {
+                let attempts = 0;
+                const timer = setInterval(function(root) {
+                  if (root.Bokeh !== undefined) {
+                    clearInterval(timer);
+                    embed_document(root);
+                  } else {
+                    attempts++;
+                    if (attempts > 100) {
+                      clearInterval(timer);
+                      console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                    }
+                  }
+                }, 10, root)
+              }
+            })(window);
+          });
+        };
+        if (document.readyState != "loading") fn();
+        else document.addEventListener("DOMContentLoaded", fn);
+      })();
+    </script>
+  </body>
+</html>

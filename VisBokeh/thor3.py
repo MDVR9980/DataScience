@@ -5,15 +5,11 @@ from bokeh.palettes import Category10, Viridis256
 from math import ceil
 
 # Set the output HTML file
-output_file('thor2.html')
+output_file('thor3.html')
 
 # Load the entire dataset without sampling
 data = pd.read_csv('thor_wwii.csv')
-
-# # Print total number of samples and unique countries for verification
-# print("Total samples in data:", len(data))
-# print("Number of unique countries:", data['COUNTRY_FLYING_MISSION'].nunique())
-# print("List of unique countries:", data['COUNTRY_FLYING_MISSION'].unique())
+data = data[data['COUNTRY_FLYING_MISSION'].isin(('USA', 'GREAT BRITAIN'))]
 
 # Group data by country and sum relevant columns
 dataGrouped = data.groupby('COUNTRY_FLYING_MISSION')[['TOTAL_TONS', 'TONS_FRAG', 'TONS_IC', 'TONS_HE']].sum().reset_index()
@@ -49,26 +45,30 @@ p = figure(
     width=1000
 )
 
-# Draw vertical bars with colors specified in the data source
-p.vbar(
+# Colors for the stack layers
+stack_colors = palette[:3]  # First three colors for the three stacks
+
+# Draw stacked bars with correct legend labels
+renderers = p.vbar_stack(
+    stackers=['TONS_FRAG', 'TONS_IC', 'TONS_HE'],
     x='COUNTRY_FLYING_MISSION',
-    top='TOTAL_TONS',
     width=0.8 / num_countries,
+    color=stack_colors,
     source=dataSource,
-    color='colors'  # Reference the color column
+    legend_label=['قطعات', ' اشتعال زا', 'انفجار قوی']
 )
 
-# Add hover tool to display detailed info on hover
-hover = HoverTool()
-hover.tooltips = [
-    ("Country", "@COUNTRY_FLYING_MISSION"),
-    ("Total Tons", "@TOTAL_TONS"),
-    ("Frag Tons", "@TONS_FRAG"),
-    ("IC Tons", "@TONS_IC"),
-    ("HE Tons", "@TONS_HE"),
-]
-hover.mode = 'vline'
-p.add_tools(hover)
+# Uncomment to add hover tool if needed
+# hover = HoverTool()
+# hover.tooltips = [
+#     ("Country", "@COUNTRY_FLYING_MISSION"),
+#     ("Total Tons", "@TOTAL_TONS"),
+#     ("Frag Tons", "@TONS_FRAG"),
+#     ("IC Tons", "@TONS_IC"),
+#     ("HE Tons", "@TONS_HE"),
+# ]
+# hover.mode = 'vline'
+# p.add_tools(hover)
 
 # Rotate x-axis labels for better readability
 p.xaxis.major_label_orientation = 1  # 45 degrees in radians
