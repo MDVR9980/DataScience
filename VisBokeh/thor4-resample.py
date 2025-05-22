@@ -5,14 +5,14 @@ from bokeh.palettes import Category10, Viridis256
 from math import ceil
 
 # Set the output HTML file
-output_file('thor4.html')
+output_file('thor4-resample.html')
 
 # Load the entire dataset without sampling
 data = pd.read_csv('thor_wwii.csv')
 data['MSNDATE'] = pd.to_datetime(data['MSNDATE'], format='%m/%d/%Y')
 
 # Group data by MSNDATE and sum relevant columns
-dataGrouped = data.groupby('MSNDATE')[['TOTAL_TONS', 'TONS_FRAG', 'TONS_IC', 'TONS_HE']].sum().reset_index()
+dataGrouped = data.groupby(pd.Grouper(key='MSNDATE', freq='M'))[['TOTAL_TONS', 'TONS_FRAG', 'TONS_IC', 'TONS_HE']].sum().reset_index()
 
 # Create a data source for Bokeh plotting
 dataSource = ColumnDataSource(dataGrouped)
