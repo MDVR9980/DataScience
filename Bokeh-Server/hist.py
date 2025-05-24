@@ -1,81 +1,65 @@
 from bokeh.palettes import Category20_16
-from bokeh.models import CheckboxGroup
-import pandas as pd 
 import numpy as np
-from bokeh.models import ColumnDataSource
+import pandas as pd
+from bokeh.models import ColumnDataSource, Slider, RangeSlider, CheckboxGroup, TabPanel, Div
 from bokeh.plotting import figure
-from bokeh.models.widgets import Slider, RangeSlider
 from bokeh.layouts import column, row
-from bokeh.models.ui import Panel
 
 def hist_tab(data):
-    def md(s_data, rs=-60, re=120, bin=10):
-        d = pd.DataFrame(columns=[
-            'proportion', 'left', 'right', 'f_proportion', 'f_interval', 'name', 'color'
-        ])
 
-        r = re - rs
-        for i, r_data in enumerate(s_data): 
-            subset = data[data['name'] == r_data]
-            # Avoid division by zero
-            arr_hist, edge = np.histogram(subset['arr_delay'], bins=int(r / bin), range=(rs, re))
-            arr_df = pd.DataFrame({
-                'proportion': arr_hist / np.sum(arr_hist) if np.sum(arr_hist) != 0 else np.zeros_like(arr_hist),
-                'left': edge[:-1],
-                'right': edge[1:]
+    def make_data(selected_names, start_range, end_range, bin_size):
+        df = pd.DataFrame(columns=['proportion', 'left', 'right', 'f_proportion', 'f_interval', 'name', 'color'])
+        total_range = end_range - start_range
+
+        for i, airline in enumerate(selected_names):
+            subset = data[data['name'] == airline]
+            hist, edges = np.histogram(subset['arr_delay'], bins=int(total_range / bin_size), range=(start_range, end_range))
+            hist_df = pd.DataFrame({
+                'proportion': hist / np.sum(hist),
+                'left': edges[:-1],
+                'right': edges[1:]
             })
-            arr_df['f_proportion'] = ['%0.5f' % p for p in arr_df['proportion']]
-            arr_df['f_interval'] = ['%d to %d minutes' % (left, right) for left, right in zip(arr_df['left'], arr_df['right'])]
-            arr_df['name'] = r_data
-            arr_df['color'] = Category20_16[i % len(Category20_16)]
-            d = pd.concat([d, arr_df], ignore_index=True)
+            hist_df['f_proportion'] = [f"{p:.5f}" for p in hist_df['proportion']]
+            hist_df['f_interval'] = [f"{int(l)} to {int(r)} minutes" for l, r in zip(hist_df['left'], hist_df['right'])]
+            hist_df['name'] = airline
+            hist_df['color'] = Category20_16[i % len(Category20_16)]
 
-        d = d.sort_values(['name', 'left'])
-        return ColumnDataSource(d)
+            df = pd.concat([df, hist_df], ignore_index=True)
 
-    def mp(s_data):
-        p = figure(width=700, height=700, title='تاخیر در پرواز')
-        p.quad(source=s_data, bottom=0, top='proportion', left='left', right='right', color='color', fill_alpha=0.7, legend_field='name')
-        p.legend.click_policy = "hide"
+        return ColumnDataSource(df)
+
+    def make_plot(source):
+        p = figure(title='تاخیر در پرواز', width=800, height=600, tools="pan,wheel_zoom,box_zoom,reset,save")
+        p.quad(source=source, bottom=0, top='proportion', left='left', right='right',
+               fill_color='color', line_color='white', fill_alpha=0.7, legend_field='name')
+        p.legend.title = "Airline"
+        p.legend.location = "top_right"
+        p.xaxis.axis_label = "Delay (minutes)"
+        p.yaxis.axis_label = "Proportion"
         return p
 
+    # کنترل‌ها
+    airline_names = sorted(data['name'].unique().tolist())
+    checkbox = CheckboxGroup(labels=airline_names, active=[0, 1])
+    bin_slider = Slider(start=1, end=30, value=5, step=1, title="دانه‌بندی هیستوگرام (minutes)")
+    range_slider = RangeSlider(start=-60, end=180, value=(-60, 120), step=5, title="بازه‌ی تاخیر")
+
+    # منبع داده اولیه
+    initial_names = [checkbox.labels[i] for i in checkbox.active]
+    source = make_data(initial_names, range_slider.value[0], range_slider.value[1], bin_slider.value)
+    plot = make_plot(source)
+
+    # تابع بروزرسانی
     def update(attr, old, new):
-        # Get checked airlines
-        air_lines_checked = [chbox.labels[i] for i in chbox.active]
-        # Generate new data source
-        new_source = md(air_lines_checked,
-                        rs=range_slider.value[0],
-                        re=range_slider.value[1],
-                        bin=slider.value)
-        # Update plot data
-        p.renderers[0].data_source.data = new_source.data
+        selected = [checkbox.labels[i] for i in checkbox.active]
+        src_new = make_data(selected, range_slider.value[0], range_slider.value[1], bin_slider.value)
+        source.data = src_new.data
 
-    # List of airline names
-    air_lines = sorted(set(data['name']))
-    # Checkbox group for airline selection
-    chbox = CheckboxGroup(labels=air_lines, active=list(range(min(2, len(air_lines)))))
-    chbox.on_change('active', update)
-
-    # Histogram bin size slider
-    slider = Slider(start=1, end=30, step=1, value=5, title='دانه بندی هیستوگرام')
-    slider.on_change('value', update)
-
-    # Delay range slider
-    range_slider = RangeSlider(start=-60, end=180, value=(-60, 120), step=5, title='بازه تاخیرها')
+    # اتصال کنترل‌ها به تابع بروزرسانی
+    checkbox.on_change('active', update)
+    bin_slider.on_change('value', update)
     range_slider.on_change('value', update)
 
-    # Initialize data for plot
-    init_data = [chbox.labels[i] for i in chbox.active]
-    src = md(init_data, rs=range_slider.value[0], re=range_slider.value[1], bin=slider.value)
-
-    # Create the plot
-    p = mp(src)
-
-    # Layouts
-    controls = column(chbox, slider, range_slider)
-    layout = row(controls, p)
-
-
-    tab = Panel(child=layout)
-
-    return tab
+    controls = column(Div(text="<b>فیلترها</b>", styles={'font-size': '16px'}), checkbox, bin_slider, range_slider, width=300)
+    layout = row(controls, plot)
+    return TabPanel(child=layout, title="پنل هیستوگرام")
