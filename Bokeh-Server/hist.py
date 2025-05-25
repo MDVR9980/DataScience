@@ -54,9 +54,12 @@ def hist_tab(data):
     # Define update behavior for when controls are changed
     def update(attr, old, new):
         selected = [checkbox.labels[i] for i in checkbox.active]
+        print("Checkbox selected:", selected)
         src_new = make_data(selected, range_slider.value[0], range_slider.value[1], bin_slider.value)
-        source.data = src_new.data  # Update the plot's data source
+        print("New source length:", len(src_new.data['top']))
+        source.data = src_new.data
 
+        
     # Attach update function to control events
     checkbox.on_change('active', update)
     bin_slider.on_change('value', update)
